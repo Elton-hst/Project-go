@@ -1,0 +1,83 @@
+basePath: /api/v1
+definitions:
+  aggregate.Product:
+    properties:
+      categoryID:
+        type: string
+      createdAt:
+        type: string
+      isActive:
+        type: boolean
+      name:
+        type: string
+      pk:
+        type: string
+      updatedAt:
+        type: string
+      validity:
+        type: string
+      value:
+        type: number
+    type: object
+host: localhost:8081
+info:
+  contact: {}
+  description: This is a sample server for using Swagger with Echo.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /product:
+    post:
+      consumes:
+      - application/json
+      description: Add a new product
+      parameters:
+      - in: path
+        name: Name
+        type: string
+      - in: path
+        name: PK
+        type: string
+      - in: path
+        name: Value
+        type: number
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Product created successfully
+          schema:
+            $ref: '#/definitions/aggregate.Product'
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create product
+  /product/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retorna os detalhes de um produto com base no ID fornecido.
+      parameters:
+      - description: ID do produto
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Product created successfully
+          schema:
+            $ref: '#/definitions/aggregate.Product'
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Recupera um produto por ID
+swagger: "2.0"
