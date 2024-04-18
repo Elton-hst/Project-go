@@ -1,24 +1,7 @@
 pipeline {
     agent any
     
-    stages {
-        stage('Build') {
-            steps {
-                echo '***version***'
-                sh 'go version'
-            }
-
-            steps {
-                echo '***update project***'
-                sh 'go mod tidy'
-            }
-
-            steps {
-                echo '***build project***'
-                sh 'go run main.go'
-            }
-        }
-        
+    stages {        
         stage('Run Unit Tests') {
             steps {
                 echo '***run tests***'
