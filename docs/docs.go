@@ -27,19 +27,13 @@ const docTemplate = `{
                 "summary": "Create product",
                 "parameters": [
                     {
-                        "type": "string",
-                        "name": "Name",
-                        "in": "path"
-                    },
-                    {
-                        "type": "string",
-                        "name": "PK",
-                        "in": "path"
-                    },
-                    {
-                        "type": "number",
-                        "name": "Value",
-                        "in": "path"
+                        "description": "Product data",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/rest.CreateProductRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -126,6 +120,20 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "value": {
+                    "type": "number"
+                }
+            }
+        },
+        "rest.CreateProductRequest": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "PK": {
+                    "type": "string"
+                },
+                "Value": {
                     "type": "number"
                 }
             }

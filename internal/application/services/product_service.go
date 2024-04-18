@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"log"
 
 	"github.com/Elton-hst/internal/application/idempotency"
 	"github.com/Elton-hst/internal/domain/aggregate"
@@ -10,7 +11,7 @@ import (
 )
 
 type ProductServiceImpl struct {
-	i    *idempotency.IdempotentHandler[*aggregate.Product]
+	i    *idempotency.IdempotentHandler[aggregate.Product]
 	repo repositories.ProductRepository
 }
 
@@ -19,21 +20,15 @@ func NewProductService(repo repositories.ProductRepository) services.ProductServ
 }
 
 func (p *ProductServiceImpl) Create(product *aggregate.Product) (*aggregate.Product, error) {
-	productIdempotenty, has, err := p.i.Startt(context.TODO(), product.PK)
+	productIdempotenty, err := p.i.Start(context.Background(), product.PK, product)
 	if err != nil {
 		return nil, err
 	}
-
-	if has {
-		return productIdempotenty, nil
-	}
+	
+	log.Printf("Service -> product: %s", productIdempotenty)
 
 	result, err := p.repo.Create(product)
 	if err != nil {
-		return nil, err
-	}
-
-	if err := p.i.Store(context.TODO(), product.PK, product); err != nil {
 		return nil, err
 	}
 	return result, nil

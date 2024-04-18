@@ -19,10 +19,10 @@ func NewProduct(name string, value float64, validity time.Time) (*Product, error
 		Validity: validity,
 	}
 
-	err := product.Validate()
-	if err != nil {
-		return nil, err
-	}
+	// err := product.Validate()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	return product, nil
 }

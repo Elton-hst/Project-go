@@ -20,7 +20,7 @@ type Category struct {
 	contract.BaseEntity
 }
 
-func NewProduct(name string, categoryId string, value float64, validity time.Time) (*Product, error) {
+func NewProduct(name string, value float64, validity time.Time) (*Product, error) {
 	product, err := product.NewProduct(name, value, validity)
 	if err != nil {
 		return nil, err
@@ -28,7 +28,6 @@ func NewProduct(name string, categoryId string, value float64, validity time.Tim
 
 	aggregateProduct := &Product{
 		Name:       product.Name,
-		CategoryID: categoryId,
 		Value:      product.Value,
 		Validity:   product.Validity,
 		BaseEntity: *contract.NewBaseEntity(),

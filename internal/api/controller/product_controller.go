@@ -24,7 +24,7 @@ func NewProductController(service services.ProductService) *ProductController {
 // @Description  Add a new product
 // @Accept       json
 // @Produce      json
-// @Param        product path rest.CreateProductRequest true "Product data"
+// @Param        product body rest.CreateProductRequest true "Product data"
 // @Success      201 {object} aggregate.Product "Product created successfully"
 // @Failure      400 {object} map[string]string "Bad request"
 // @Router       /product [post]
@@ -63,7 +63,7 @@ func (p *ProductController) CreateProduct(c echo.Context) error {
 // @Failure     400 {object} map[string]string "Bad request"
 // @Router      /product/{id} [get]
 func (p *ProductController) GetProduct(c echo.Context) error {
-    id := c.Param("id")
+	id := c.Param("id")
 
 	result, err := p.service.FindById(id)
 	if err != nil {

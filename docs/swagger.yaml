@@ -19,6 +19,15 @@ definitions:
       value:
         type: number
     type: object
+  rest.CreateProductRequest:
+    properties:
+      Name:
+        type: string
+      PK:
+        type: string
+      Value:
+        type: number
+    type: object
 host: localhost:8081
 info:
   contact: {}
@@ -32,15 +41,12 @@ paths:
       - application/json
       description: Add a new product
       parameters:
-      - in: path
-        name: Name
-        type: string
-      - in: path
-        name: PK
-        type: string
-      - in: path
-        name: Value
-        type: number
+      - description: Product data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/rest.CreateProductRequest'
       produces:
       - application/json
       responses:

@@ -23,3 +23,23 @@ INFO:	2024/04/10 17:55:25 product_controller.go:55: Success on create new produc
 INFO:	2024/04/10 17:59:57 product_controller.go:45: Start create new product: 887cddd5-a3bd-40c6-9a48-f164c2afa252
 INFO:	2024/04/10 17:59:57 product_controller.go:55: Success on create new product
 ERROR:	2024/04/16 14:25:03 main.go:37: Failed to initialize the server
+ERROR:	2024/04/18 15:46:46 create_product_request.go:20: Product invalide
+INFO:	2024/04/18 15:55:39 product_controller.go:42: Start create new product: 0042ef1d-7073-4488-ac54-0913e2e084ca
+INFO:	2024/04/18 17:08:24 product_controller.go:42: Start create new product: 304f6209-ca8f-45a0-ba62-d495e57391fe
+INFO:	2024/04/18 17:15:18 product_controller.go:42: Start create new product: 440ace62-d6ba-498b-b368-e18ae952a86f
+INFO:	2024/04/18 17:17:43 product_controller.go:42: Start create new product: e569d7b6-7c02-4356-aac4-f585a3da8ebe
+INFO:	2024/04/18 17:23:12 product_controller.go:45: Start create new product: a831833c-86d4-47aa-9863-1e2fe5e1fc04
+INFO:	2024/04/18 17:26:10 product_controller.go:45: Start create new product: 66a4e98c-cd73-4c32-90c6-bfb1f29071dc
+INFO:	2024/04/18 17:29:55 product_controller.go:42: Start create new product: 76b65246-093e-4872-b529-9ed9a3c5f25e
+INFO:	2024/04/18 17:29:55 product_controller.go:42: Start create new product: 33320372-1674-4243-82b1-9fc19886029b
+INFO:	2024/04/18 17:29:55 product_controller.go:42: Start create new product: 2cbd4956-76b1-4a7b-88ad-32a3b365b5e1
+INFO:	2024/04/18 17:29:55 product_controller.go:42: Start create new product: de629879-c86b-494d-9081-bb28f8152990
+INFO:	2024/04/18 17:54:31 product_controller.go:42: Start create new product: 0965725d-2ade-4e9a-b72c-c79abc8b0727
+INFO:	2024/04/18 17:59:35 product_controller.go:42: Start create new product: 1ab0f710-148c-4b38-98dc-ad113760531b
+INFO:	2024/04/18 17:59:35 product_controller.go:42: Start create new product: e4f57c90-0758-473e-8304-d854d813b070
+INFO:	2024/04/18 17:59:35 product_controller.go:42: Start create new product: e0db1f21-92d5-4550-8c81-643f144c5159
+INFO:	2024/04/18 17:59:35 product_controller.go:42: Start create new product: 29e40e1b-5dc6-4bf3-bee5-10ba3f340d28
+INFO:	2024/04/18 18:08:52 product_controller.go:42: Start create new product: 19e568ef-82d4-4a45-b005-dfbb0bea3cd7
+INFO:	2024/04/18 18:08:52 product_controller.go:42: Start create new product: 9c62e364-d01d-4443-996a-225f7a37a5f6
+INFO:	2024/04/18 18:08:52 product_controller.go:42: Start create new product: a5e00129-b93d-4a25-ac47-7f06697871a6
+INFO:	2024/04/18 18:08:52 product_controller.go:42: Start create new product: 6686be5a-b8de-49f1-b27e-cc9be08cac31

@@ -8,7 +8,6 @@ import (
 	"github.com/Elton-hst/internal/domain/aggregate"
 	"github.com/Elton-hst/internal/domain/factory"
 	"github.com/Elton-hst/internal/infrastructure/mocks"
-	"github.com/google/uuid"
 	"go.uber.org/mock/gomock"
 )
 
@@ -19,7 +18,7 @@ func TestProductService_CreateUser(t *testing.T) {
 	name := "Pão"
 	value := 50.0
 
-	product, err := factory.CreatedProduct(uuid.NewString(), name, value, time.Now())
+	product, err := factory.CreatedProduct(name, value, time.Now())
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -27,7 +26,7 @@ func TestProductService_CreateUser(t *testing.T) {
 	repo := mocks.NewMockProductRepository(control)
 	service := NewProductService(repo)
 
-	repo.EXPECT().Create(gomock.Any()).Return(aggregate.NewProduct("Pão", uuid.NewString(), 50.0, time.Now()))
+	repo.EXPECT().Create(gomock.Any()).Return(aggregate.NewProduct("Pão", 50.0, time.Now()))
 
 	seila, err := service.Create(product)
 
@@ -40,5 +39,4 @@ func TestProductService_CreateUser(t *testing.T) {
 		t.FailNow()
 		return
 	}
-
 }

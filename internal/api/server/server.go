@@ -25,9 +25,8 @@ func (s *Server) Start() *echo.Echo {
 	redis.NewRedis()
 
 	s.server.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: "URI: ${uri} | METHOD: ${method} | STATUS: ${status} | ERROR: ${error} | LATENCY ${latency} \n",
+		Format: "URI: ${uri} | METHOD: ${method} | STATUS: ${status} | ERROR: ${error}\n",
 	}))
-	s.server.Use(middleware.Recover())
 	s.server.Use(middleware.CORS())
 
 	s.server.GET("/swagger/*", echoSwagger.WrapHandler)

@@ -4,15 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"sync"
 
-	rd "github.com/redis/go-redis/v9"
 	"github.com/Elton-hst/internal/infrastructure/redis"
+	rd "github.com/redis/go-redis/v9"
 )
 
 type IdempotentHandler[T any] struct {
 	redis *redis.Redis
-	mutex sync.Mutex
 }
 
 func (i *IdempotentHandler[T]) Startt(ctx context.Context, idempotencyKey string) (T, bool, error) {
@@ -43,10 +41,7 @@ func (i *IdempotentHandler[T]) Store(ctx context.Context, idempotencyKey string,
 	return i.redis.Client.HSet(ctx, "idempotencyKey:"+idempotencyKey, "value", b).Err()
 }
 
-func (h *IdempotentHandler[T]) Start(ctx context.Context, idempotencyKey string, calculate func() interface{}) (interface{}, error) {
-	h.mutex.Lock()
-	defer h.mutex.Unlock()
-
+func (h *IdempotentHandler[T]) Start(ctx context.Context, idempotencyKey string, value interface{}) (interface{}, error) {
 	val, err := h.redis.Client.Get(ctx, idempotencyKey).Result()
 	if err == nil {
 		return val, nil
@@ -54,7 +49,7 @@ func (h *IdempotentHandler[T]) Start(ctx context.Context, idempotencyKey string,
 		return nil, fmt.Errorf("error checking key in Redis: %v", err)
 	}
 
-	result := calculate()
+	result := value
 
 	if err := h.redis.Client.Set(ctx, idempotencyKey, result, 0).Err(); err != nil {
 		return nil, fmt.Errorf("error setting key in Redis: %v", err)

@@ -22,7 +22,7 @@ func (r *Router) Router() *echo.Echo {
 	{
 		product := v1.Group("/product")
 		{
-			product.GET("", r.ProductController.CreateProduct)
+			product.POST("", r.ProductController.CreateProduct)
 		}
 	}
 
