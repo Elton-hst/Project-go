@@ -1,10 +1,29 @@
 pipeline {
     agent any
     
-    stages {        
+    stages {
+        stage('Prepare') {
+            steps {
+                tools {
+                    go '1.22'
+                }
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                sh 'go mod download'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'go build -o project-go'
+            }
+        }
+        
         stage('Run Unit Tests') {
             steps {
-                echo '***run tests***'
                 sh 'go test'
             }
         }
