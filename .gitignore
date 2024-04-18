@@ -1,0 +1,10 @@
+# ide
+.vscode
+
+# configs
+.env
+.log
+.json
+
+# docs
+./docs
