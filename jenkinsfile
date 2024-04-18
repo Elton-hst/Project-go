@@ -5,7 +5,7 @@ pipeline {
         stage('Setup') {
             steps {
                 script {
-                    def root = tool type: 'go', name: '1.22'
+                    def root = tool type: 'go', name: '1.19'
                     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                         sh 'go version'
                     }
