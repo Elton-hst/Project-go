@@ -6,12 +6,16 @@ pipeline {
             steps {
                 echo '***version***'
                 sh 'go version'
+            }
 
+            steps {
                 echo '***update project***'
                 sh 'go mod tidy'
+            }
 
+            steps {
                 echo '***build project***'
-                sh 'go build ...'
+                sh 'go run main.go'
             }
         }
         
