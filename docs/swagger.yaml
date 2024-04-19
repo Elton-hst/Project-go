@@ -61,7 +61,7 @@ paths:
               type: string
             type: object
       summary: Create product
-  /product/{id}:
+  /product{id}:
     get:
       consumes:
       - application/json

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Elton-hst/internal/api/rest"
@@ -61,9 +62,10 @@ func (p *ProductController) CreateProduct(c echo.Context) error {
 // @Param       id path string true "ID do produto"
 // @Success     201 {object} aggregate.Product "Product created successfully"
 // @Failure     400 {object} map[string]string "Bad request"
-// @Router      /product/{id} [get]
+// @Router      /product{id} [get]
 func (p *ProductController) GetProduct(c echo.Context) error {
 	id := c.Param("id")
+	log.Println(id)
 	result, err := p.service.FindById(id)
 	if err != nil {
 		logger.Error.Printf("Failure on find product %s", id)

@@ -2,7 +2,7 @@ package services
 
 import (
 	"context"
-	"log"
+	"encoding/json"
 
 	"github.com/Elton-hst/internal/application/idempotency"
 	"github.com/Elton-hst/internal/domain/aggregate"
@@ -21,30 +21,37 @@ func NewProductService(repo repositories.ProductRepository) services.ProductServ
 func (p *ProductServiceImpl) Create(product *aggregate.Product) (*aggregate.Product, error) {
 	productIdempotenty, err := idempotency.Start(context.Background(), product.PK, product)
 	if err != nil {
-		return nil, err
+		result, err := p.repo.Create(product)
+		if err != nil {
+			return nil, err
+		}
+		return result, nil
 	}
-	log.Printf("Service -> product: %s", productIdempotenty)
 
-	result, err := p.repo.Create(product)
+	err = json.Unmarshal(productIdempotenty, &product)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return product, nil
 }
 
 func (p *ProductServiceImpl) FindById(id string) (*aggregate.Product, error) {
 	var product aggregate.Product
+
 	productIdempotenty, err := idempotency.Start(context.Background(), id, product)
 	if err != nil {
-		return nil, err
+		result, err := p.repo.FindById(id)
+		if err != nil {
+			return nil, err
+		}
+		return result, nil
 	}
-	log.Printf("Service -> product: %s", productIdempotenty)
 
-	result, err := p.repo.FindById(id)
+	err = json.Unmarshal(productIdempotenty, &product)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return &product, nil
 }
 
 func (p *ProductServiceImpl) DeleteById(id string) error {

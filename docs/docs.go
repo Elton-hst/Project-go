@@ -55,7 +55,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/product/{id}": {
+        "/product{id}": {
             "get": {
                 "description": "Retorna os detalhes de um produto com base no ID fornecido.",
                 "consumes": [
