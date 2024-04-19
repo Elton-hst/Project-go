@@ -64,7 +64,6 @@ func (p *ProductController) CreateProduct(c echo.Context) error {
 // @Router      /product/{id} [get]
 func (p *ProductController) GetProduct(c echo.Context) error {
 	id := c.Param("id")
-
 	result, err := p.service.FindById(id)
 	if err != nil {
 		logger.Error.Printf("Failure on find product %s", id)
@@ -73,5 +72,6 @@ func (p *ProductController) GetProduct(c echo.Context) error {
 		})
 	}
 
+	logger.Info.Printf("Success on find product %s", result.PK)
 	return c.JSON(http.StatusOK, result)
 }

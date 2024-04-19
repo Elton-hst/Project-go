@@ -11,7 +11,6 @@ import (
 )
 
 type ProductServiceImpl struct {
-	i    *idempotency.IdempotentHandler[aggregate.Product]
 	repo repositories.ProductRepository
 }
 
@@ -20,11 +19,10 @@ func NewProductService(repo repositories.ProductRepository) services.ProductServ
 }
 
 func (p *ProductServiceImpl) Create(product *aggregate.Product) (*aggregate.Product, error) {
-	productIdempotenty, err := p.i.Start(context.Background(), product.PK, product)
+	productIdempotenty, err := idempotency.Start(context.Background(), product.PK, product)
 	if err != nil {
 		return nil, err
 	}
-	
 	log.Printf("Service -> product: %s", productIdempotenty)
 
 	result, err := p.repo.Create(product)
@@ -35,6 +33,13 @@ func (p *ProductServiceImpl) Create(product *aggregate.Product) (*aggregate.Prod
 }
 
 func (p *ProductServiceImpl) FindById(id string) (*aggregate.Product, error) {
+	var product aggregate.Product
+	productIdempotenty, err := idempotency.Start(context.Background(), id, product)
+	if err != nil {
+		return nil, err
+	}
+	log.Printf("Service -> product: %s", productIdempotenty)
+
 	result, err := p.repo.FindById(id)
 	if err != nil {
 		return nil, err
