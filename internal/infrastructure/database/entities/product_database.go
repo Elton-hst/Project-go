@@ -8,11 +8,11 @@ import (
 )
 
 type ProductDatabase struct {
+	BaseEntityDatabase
 	Name       string
 	CategoryID string
 	Value      float64
 	Validity   time.Time
-	BaseEntityDatabase
 }
 
 func (p *ProductDatabase) ToProductAggregate() *aggregate.Product {

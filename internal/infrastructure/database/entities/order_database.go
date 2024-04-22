@@ -6,19 +6,19 @@ import (
 )
 
 type OrderDatabase struct {
+	BaseEntityDatabase
 	CustomerId string
 	OrderItem  []OrderItemDatabase `gorm:"foreignKey:OrderId;"`
-	BaseEntityDatabase
 }
 
 type OrderItemDatabase struct {
+	BaseEntityDatabase
+	OrderId     string
 	Name        string
 	Description string
 	Price       float64
 	Quantity    int
-	OrderId     string
 	ProductId   string
-	BaseEntityDatabase
 }
 
 func (order *OrderDatabase) ToOderAggregate() *aggregate.Order {
@@ -57,11 +57,5 @@ func (item *OrderItemDatabase) ToOderItemAggregate() *aggregate.OrderItem {
 		Quantity:    item.Quantity,
 		OrderId:     item.OrderId,
 		ProductId:   item.ProductId,
-		BaseEntity: contract.BaseEntity{
-			PK:        item.BaseEntityDatabase.PK,
-			IsActive:  item.BaseEntityDatabase.IsActive,
-			CreatedAt: item.BaseEntityDatabase.CreatedAt,
-			UpdatedAt: item.BaseEntityDatabase.UpdatedAt,
-		},
 	}
 }

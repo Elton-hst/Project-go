@@ -6,8 +6,9 @@ import (
 )
 
 type OrderMigration struct {
-	Database *gorm.DB
-	Order    *entities.OrderDatabase
+	Database  *gorm.DB
+	Order     *entities.OrderDatabase
+	OrderItem *entities.OrderItemDatabase
 }
 
 func NewOrderMigration(db *gorm.DB) *OrderMigration {
@@ -15,14 +16,14 @@ func NewOrderMigration(db *gorm.DB) *OrderMigration {
 }
 
 func (or *OrderMigration) CreateTable() error {
-	if err := or.Database.Migrator().AutoMigrate(or.Order); err != nil {
+	if err := or.Database.Migrator().AutoMigrate(or.OrderItem, or.Order); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (or *OrderMigration) DropTable() error {
-	if err := or.Database.Migrator().DropTable(or.Order); err != nil {
+	if err := or.Database.Migrator().DropTable(or.OrderItem, or.Order); err != nil {
 		return err
 	}
 	return nil

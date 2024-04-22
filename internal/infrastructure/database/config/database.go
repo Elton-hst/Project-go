@@ -74,15 +74,15 @@ func initializeMigration(DB *gorm.DB) {
 
 	if orderTable {
 		if err := order.DropTable(); err != nil {
-			logger.Error.Printf("Failed to drop table: %T", order.Order)
+			logger.Error.Println("Failed to drop table: order")
 		}
 
 		if err := order.CreateTable(); err != nil {
-			logger.Info.Println("Order table created successfully")
+			logger.Error.Println("Error creating order")
 		}
 	} else {
 		if err := order.CreateTable(); err != nil {
-			logger.Info.Println("Order table created successfully")
+			logger.Error.Println("Error creating order")
 		}
 	}
 
@@ -91,15 +91,15 @@ func initializeMigration(DB *gorm.DB) {
 
 	if customerTable {
 		if err := customer.DropTable(); err != nil {
-			logger.Error.Printf("Failed to drop table: %T", customer.Customer)
+			logger.Error.Println("Failed to drop table: customer")
 		}
 
 		if err := customer.CreateTable(); err != nil {
-			logger.Info.Println("Customer table created successfully")
+			logger.Error.Println("Error creating customer")
 		}
 	} else {
 		if err := customer.CreateTable(); err != nil {
-			logger.Info.Println("Customer table created successfully")
+			logger.Error.Println("Error creating customer")
 		}
 	}
 
@@ -108,15 +108,15 @@ func initializeMigration(DB *gorm.DB) {
 
 	if productTable {
 		if err := product.DropTable(); err != nil {
-			logger.Error.Printf("Failed to drop table: %T", product.Product)
+			logger.Error.Println("Failed to drop table: product")
 		}
 
 		if err := product.CreateTable(); err != nil {
-			logger.Info.Println("Product table created successfully")
+			logger.Error.Println("Error creating product")
 		}
 	} else {
 		if err := product.CreateTable(); err != nil {
-			logger.Info.Println("Product table created successfully")
+			logger.Error.Println("Error creating product")
 		}
 	}
 

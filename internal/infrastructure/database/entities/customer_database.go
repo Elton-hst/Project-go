@@ -7,8 +7,8 @@ import (
 )
 
 type CustomerDatabase struct {
-	PersonDatabase
 	BaseEntityDatabase
+	PersonDatabase
 }
 
 type PersonDatabase struct {
